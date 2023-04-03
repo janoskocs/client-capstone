@@ -6,6 +6,8 @@ const Navigation = () => {
       <Link to="/">
         <h1>MemoVault</h1>
       </Link>
+      <Link to="/login">Login</Link>
+      <Link to="/signup">Signup</Link>
     </nav>
   );
 };
