@@ -1,9 +1,20 @@
 import axios from "axios";
+import { useAuthContext } from "../../hooks/useAuthContext";
 const MomentCard = ({ moment, getMoments }) => {
+  const { user } = useAuthContext();
+
   const handleDelete = async () => {
+    if (!user) {
+      return;
+    }
     try {
       const { data } = await axios.delete(
-        `${process.env.REACT_APP_SERVER_URL}api/moments/${moment._id}`
+        `${process.env.REACT_APP_SERVER_URL}api/moments/${moment._id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${user.token}`,
+          },
+        }
       );
       getMoments();
       console.log(data, "deleted");
