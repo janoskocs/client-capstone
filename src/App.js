@@ -5,6 +5,7 @@ import HomePage from "./pages/HomePage";
 import Navigation from "./components/Navigation/Navigation";
 import LogInPage from "./pages/LogInPage/LogInPage";
 import SignUpPage from "./pages/SignUpPage/SignUpPage";
+import FriendsPage from "./pages/FriendsPage/FriendsPage";
 
 const App = () => {
   const { user } = useAuthContext();
@@ -26,6 +27,10 @@ const App = () => {
             <Route
               path="/signup"
               element={!user ? <SignUpPage /> : <Navigate to="/" />}
+            />
+            <Route
+              path="/friends"
+              element={user ? <FriendsPage /> : <Navigate to="/" />}
             />
           </Routes>
         </BrowserRouter>

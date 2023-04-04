@@ -24,6 +24,7 @@ const Navigation = () => {
 
       {user && (
         <>
+          <Link to="/friends">Friends</Link>
           <p>{user.email}</p> <button onClick={handleLogout}>Log out</button>{" "}
         </>
       )}
