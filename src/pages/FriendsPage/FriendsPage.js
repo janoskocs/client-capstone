@@ -21,8 +21,14 @@ const FriendsPage = () => {
 
     getUsers();
   }, []);
-  console.log(allUsers, user);
 
+  const followers =
+    !allUsers ||
+    allUsers.filter((person) => {
+      return person._id === user._id;
+    });
+
+  console.log(followers);
   return (
     <section className="page">
       <h2 className="page__title">Friends</h2>
@@ -37,7 +43,9 @@ const FriendsPage = () => {
           })}
       </section>
 
-      <section className="my-followers"></section>
+      <section className="my-followers">
+        <h3>My followers</h3>
+      </section>
     </section>
   );
 };
