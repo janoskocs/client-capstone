@@ -5,6 +5,8 @@ const SignUpPage = () => {
   const [signUpInput, setSignUpInput] = useState({
     email: "",
     password: "",
+    first_name: "",
+    last_name: "",
   });
 
   const { signup, error, isLoading } = useSignUp();
@@ -20,6 +22,20 @@ const SignUpPage = () => {
   return (
     <form className="form" onSubmit={handleSubmit}>
       <h3 className="form__title">Sign up</h3>
+      <label htmlFor="first_name">First name</label>
+      <input
+        type="text"
+        name="first_name"
+        onChange={(e) => handleInput(e)}
+        value={signUpInput.password}
+      />
+      <label htmlFor="last_name">Last name</label>
+      <input
+        type="text"
+        name="last_name"
+        onChange={(e) => handleInput(e)}
+        value={signUpInput.password}
+      />
       <label htmlFor="title">Email</label>
       <input
         type="email"
@@ -27,7 +43,7 @@ const SignUpPage = () => {
         onChange={(e) => handleInput(e)}
         value={signUpInput.email}
       />
-      <label htmlFor="content">Content</label>
+      <label htmlFor="content">Password</label>
       <input
         type="password"
         name="password"
