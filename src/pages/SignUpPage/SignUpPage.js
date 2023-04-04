@@ -13,11 +13,16 @@ const SignUpPage = () => {
   const handleInput = (e) => {
     setSignUpInput({ ...signUpInput, [e.target.name]: e.target.value });
   };
-
+  console.log(signUpInput);
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    await signup(signUpInput.email, signUpInput.password);
+    await signup(
+      signUpInput.email,
+      signUpInput.password,
+      signUpInput.first_name,
+      signUpInput.last_name
+    );
   };
   return (
     <form className="form" onSubmit={handleSubmit}>
@@ -27,14 +32,14 @@ const SignUpPage = () => {
         type="text"
         name="first_name"
         onChange={(e) => handleInput(e)}
-        value={signUpInput.password}
+        value={signUpInput.first_name}
       />
       <label htmlFor="last_name">Last name</label>
       <input
         type="text"
         name="last_name"
         onChange={(e) => handleInput(e)}
-        value={signUpInput.password}
+        value={signUpInput.last_name}
       />
       <label htmlFor="title">Email</label>
       <input
