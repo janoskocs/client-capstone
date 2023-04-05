@@ -2,10 +2,21 @@
 $font-title: "Nunito", sans-serif;
 $font-text: "PT Sans", sans-serif;
 
+//Brand colours
 $primary-brand: #ff8787;
 $primary-brand-light: #f8c4b4;
 $secondary-brand: #bce29e;
 $secondary-brand-light: #e5ebb2;
 
 $light: #fff;
+$neutral: #808080;
 $dark: #000;
+
+//Responsive breakpoints
+$tablet-breakpoint: 768px;
+$desktop-breakpoint: 1280px;
+$desktop-slim-width: 1020px;
+
+//Font weights
+$regular: 300;
+$bold: 700;

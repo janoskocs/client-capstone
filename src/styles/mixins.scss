@@ -1,0 +1,29 @@
+@use "./variables" as *;
+
+/* Layout mixins */
+@mixin displayFlex(
+  $direction: row,
+  $justify: flex-start,
+  $align: normal,
+  $wrap: nowrap
+) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $justify;
+  align-items: $align;
+  flex-wrap: $wrap;
+}
+
+@mixin font(
+  $font: $font-text,
+  $weight: 300,
+  $size: 1rem,
+  $color: $dark,
+  $line-height: auto
+) {
+  font-family: $font;
+  font-weight: $weight;
+  font-size: $size;
+  color: $color;
+  line-height: $line-height;
+}
