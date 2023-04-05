@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
-import { useAuthContext } from "../hooks/useAuthContext";
+import { useAuthContext } from "../../hooks/useAuthContext";
 //Components
-import MomentCard from "../components/MomentCard/MomentCard";
-import MomentForm from "../components/MomentForm/MomentForm";
+import MomentCard from "../../components/MomentCard/MomentCard";
+import MomentForm from "../../components/MomentForm/MomentForm";
 
 const HomePage = () => {
   const [momentsList, setMomentsList] = useState(null);
@@ -35,6 +35,13 @@ const HomePage = () => {
 
   return (
     <section className="home">
+      <div class="collapsible">
+        <input id="collapsible1" type="checkbox" name="collapsible" />
+        <label for="collapsible1">Capture the moment</label>
+        <div class="collapsible-body">
+          <MomentForm getMoments={getMoments} />
+        </div>
+      </div>
       <section className="moments">
         {momentsList &&
           momentsList.map((moment) => {
@@ -47,8 +54,6 @@ const HomePage = () => {
             );
           })}
       </section>
-
-      <MomentForm getMoments={getMoments} />
     </section>
   );
 };

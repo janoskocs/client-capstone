@@ -1,4 +1,5 @@
-import React from "react";
+import "./Navigation.scss";
+import logo from "../../assets/icons/logo.png";
 import { Link } from "react-router-dom";
 import { useLogout } from "../../hooks/useLogout";
 import { useAuthContext } from "../../hooks/useAuthContext";
@@ -11,23 +12,32 @@ const Navigation = () => {
   };
   return (
     <nav className="nav">
-      <Link to="/">
-        <h1>MemoVault</h1>
-      </Link>
+      <div className="nav__wrapper ">
+        <Link to="/" className="nav__link nav__link--logo">
+          <div className="nav__section-container">
+            <img src={logo} alt="MemoVault" className="nav__logo" />
+            <h1 className="nav__title">MemoVault</h1>
+          </div>
+        </Link>
 
-      {!user && (
-        <>
-          <Link to="/login">Login</Link>
-          <Link to="/signup">Signup</Link>
-        </>
-      )}
+        {!user && (
+          <div className="nav__section-container">
+            <Link className="paper-btn nav__link " to="/login">
+              Login
+            </Link>
+            <Link className="paper-btn btn-success nav__link" to="/signup">
+              Signup
+            </Link>
+          </div>
+        )}
 
-      {user && (
-        <>
-          <Link to="/friends">Friends</Link>
-          <p>{user.email}</p> <button onClick={handleLogout}>Log out</button>{" "}
-        </>
-      )}
+        {user && (
+          <>
+            <Link to="/friends">Friends</Link>
+            <p>{user.email}</p> <button onClick={handleLogout}>Log out</button>{" "}
+          </>
+        )}
+      </div>
     </nav>
   );
 };

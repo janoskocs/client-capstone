@@ -1,0 +1,41 @@
+@use "../../styles/variables" as *;
+@use "../../styles/responsive" as *;
+@use "../../styles/mixins" as *;
+
+.nav {
+  @include displayFlex(null, space-between, center);
+
+  &__wrapper {
+    width: 100%;
+    margin: 0;
+    @include displayFlex(null, space-between, center);
+  }
+  &__section-container {
+    @include displayFlex(null, space-between, center);
+    width: 25%;
+    margin: 0;
+  }
+  &__logo {
+    width: 4rem;
+    border: none;
+  }
+  &__title {
+    @include font($font-title, $bold, 2rem, $primary-brand);
+    margin-left: 0.75rem;
+  }
+
+  &__link {
+    text-decoration: none;
+
+    &--cta {
+      background-color: $secondary-brand;
+    }
+
+    &--logo {
+      border-bottom: none;
+      &:hover {
+        border-bottom: none;
+      }
+    }
+  }
+}
