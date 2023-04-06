@@ -55,6 +55,10 @@ const SignUpPage = () => {
         onChange={(e) => handleInput(e)}
         value={signUpInput.password}
       />
+      <p>
+        Password must contain a lowercase letter, uppercase letter, number, and
+        a symbol.
+      </p>
       <button disabled={isLoading} type="submit">
         Sign up
       </button>

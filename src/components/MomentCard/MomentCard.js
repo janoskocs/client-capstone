@@ -23,7 +23,7 @@ const MomentCard = ({ moment, getMoments }) => {
     }
   };
   return (
-    <section className="moment">
+    <section className="moment border border-primary">
       <h4 className="moment__title">{moment.title}</h4>
       <p className="moment__content">{moment.content}</p>
       <p className="moment__mood">{moment.mood}</p>
