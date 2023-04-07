@@ -4,7 +4,7 @@ import { useAuthContext } from "../../hooks/useAuthContext";
 import { useUploadImage } from "../../hooks/useUploadImage";
 
 const MomentForm = ({ getMoments }) => {
-  const { uploadImage, isUploading, imgUrl } = useUploadImage();
+  const { uploadImage, isUploading, imgUrl, uploadError } = useUploadImage();
 
   //Get user from context
   const { user } = useAuthContext();
@@ -27,16 +27,20 @@ const MomentForm = ({ getMoments }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    await uploadImage(imageToBeUploaded);
-
     if (!user) {
       setError("You must be logged in.");
       return <p>{error}</p>;
     }
+
+    try {
+      await uploadImage(imageToBeUploaded);
+    } catch (error) {
+      return <p>Something went wrong. {error}</p>;
+    }
+
     const moment = { ...momentDetails, ...mood };
 
     try {
-      // uploadImage(imageToBeUploaded[0]);
       const { data } = await axios.post(
         `${process.env.REACT_APP_SERVER_URL}api/moments/`,
         moment,
@@ -77,6 +81,7 @@ const MomentForm = ({ getMoments }) => {
           setImageToBeUploaded(e.target.files);
         }}
       />
+      {imgUrl && <p>Image uploaded.</p>}
       <button type="submit">Submit</button>
     </form>
   );

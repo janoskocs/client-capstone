@@ -1,10 +1,12 @@
 import { initializeApp } from "firebase/app";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { useState } from "react";
+import { v4 } from "uuid";
 
 export const useUploadImage = () => {
   const [isUploading, setIsUploading] = useState(false);
   const [imgUrl, setImgUrl] = useState(null);
+  const [uploadError, setUploadError] = useState(null);
   //Firebase configuration
   const {
     REACT_APP_FB_API_KEY: apiKey,
@@ -30,7 +32,8 @@ export const useUploadImage = () => {
 
   const uploadImage = async (imageFile) => {
     //Create a storage ref for the new image, it's like a variable in Firebase for the image
-    const storageRef = ref(storage, `moments/${imageFile[0].name}`);
+    const uniqueId = v4();
+    const storageRef = ref(storage, `moments/${uniqueId}${imageFile[0].name}`);
 
     try {
       setIsUploading(true);
@@ -45,9 +48,9 @@ export const useUploadImage = () => {
         setImgUrl(url);
       }
     } catch (error) {
-      console.log(error);
+      setUploadError(error);
     }
   };
 
-  return { uploadImage, isUploading, imgUrl };
+  return { uploadImage, isUploading, imgUrl, uploadError };
 };
