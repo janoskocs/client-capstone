@@ -1,9 +1,12 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { initializeApp } from "firebase/app";
 import axios from "axios";
 import { useAuthContext } from "../../hooks/useAuthContext";
 
 const MomentForm = ({ getMoments }) => {
   const { user } = useAuthContext();
+
+  const [imageToBeUploaded, setImageToBeUploaded] = useState(null);
   const [momentDetails, setMomentDetails] = useState({
     title: "",
     content: "",
@@ -56,6 +59,14 @@ const MomentForm = ({ getMoments }) => {
         name="content"
         onChange={(e) => handleInput(e)}
         value={momentDetails.content}
+      />
+
+      <input
+        type="file"
+        name="image-upload"
+        onChange={(e) => {
+          setImageToBeUploaded(e.target);
+        }}
       />
       <button>Submit</button>
     </form>

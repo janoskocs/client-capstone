@@ -12,3 +12,13 @@
   border-top-right-radius: 15px 225px;
   border: 1px solid black;
 }
+
+.moment {
+  &__text {
+    color: red;
+
+    &:hover {
+      color: beige;
+    }
+  }
+}

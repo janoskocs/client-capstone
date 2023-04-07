@@ -84,12 +84,12 @@ const HomePage = () => {
     { id: "1", position: { x: 0, y: 100 }, data: { data: "No moments." } },
   ];
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNode);
-  const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
+  // const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
 
-  const onConnect = useCallback(
-    (params) => setEdges((eds) => addEdge(params, eds)),
-    [setEdges]
-  );
+  // const onConnect = useCallback(
+  //   (params) => setEdges((eds) => addEdge(params, eds)),
+  //   [setEdges]
+  // );
 
   return (
     <section className="home">
@@ -118,14 +118,14 @@ const HomePage = () => {
         <ReactFlowProvider>
           <ReactFlow
             nodes={nodes}
-            edges={edges}
+            // edges={edges}
             onNodesChange={onNodesChange}
-            onEdgesChange={onEdgesChange}
-            onConnect={onConnect}
+            // onEdgesChange={onEdgesChange}
+            // onConnect={onConnect}
             nodeTypes={nodeTypes}
           />
-
-          {/* <Controls />
+          {/* 
+          <Controls />
           <MiniMap />
           <Background variant="dots" gap={12} size={1} /> */}
         </ReactFlowProvider>
