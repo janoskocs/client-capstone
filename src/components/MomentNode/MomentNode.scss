@@ -14,11 +14,21 @@
 }
 
 .moment {
-  &__text {
-    color: red;
+  padding: 1rem;
 
+  &__title {
+    margin: 0 0 1rem 0;
+  }
+  &__img {
+    width: 15rem;
+  }
+  &__text {
     &:hover {
       color: beige;
     }
+  }
+
+  &__user {
+    font-weight: bold;
   }
 }
