@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import axios from "axios";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import { useUploadImage } from "../../hooks/useUploadImage";
@@ -7,8 +7,11 @@ const MomentForm = ({ getMoments }) => {
   //Get user from context
   const { user } = useAuthContext();
 
+  const [isCollapsed, setIsCollapsed] = useState(false);
+  const [uploadStatusMessage, setUploadStatusMessage] =
+    useState("Capture the moment");
   //Initialise input states
-  const { uploadImage, isUploading, uploadError, imgUrl } = useUploadImage();
+  const { uploadImage, imgUrl } = useUploadImage();
   const [momentDetails, setMomentDetails] = useState({
     title: "",
     content: "",
@@ -42,7 +45,7 @@ const MomentForm = ({ getMoments }) => {
 
   const postMoment = async (moment) => {
     try {
-      const { data } = await axios.post(
+      await axios.post(
         `${process.env.REACT_APP_SERVER_URL}api/moments/`,
         moment,
         {
@@ -51,40 +54,58 @@ const MomentForm = ({ getMoments }) => {
           },
         }
       );
+      setIsCollapsed(false);
+      setUploadStatusMessage("Moment captured ✅");
       getMoments();
+
+      setTimeout(() => {
+        setUploadStatusMessage("Capture the moment");
+      }, 5000);
     } catch (error) {
       console.log(error);
     }
   };
 
   return (
-    <form className="form" onSubmit={handleSubmit}>
-      <h3 className="form__title">Capture a moment</h3>
-      <label htmlFor="title">Title</label>
+    <div className="collapsible">
       <input
-        type="text"
-        name="title"
-        onChange={(e) => handleInput(e)}
-        value={momentDetails.title}
+        id="collapsible1"
+        type="checkbox"
+        name="collapsible"
+        checked={isCollapsed}
+        onClick={(e) => setIsCollapsed(!isCollapsed)}
       />
-      <label htmlFor="content">Content</label>
-      <input
-        type="text"
-        name="content"
-        onChange={(e) => handleInput(e)}
-        value={momentDetails.content}
-      />
+      <label htmlFor="collapsible1">{uploadStatusMessage}</label>
+      <div className="collapsible-body">
+        <form className="form" onSubmit={handleSubmit}>
+          <h3 className="form__title">Capture a moment</h3>
+          <label htmlFor="title">Title</label>
+          <input
+            type="text"
+            name="title"
+            onChange={(e) => handleInput(e)}
+            value={momentDetails.title}
+          />
+          <label htmlFor="content">Content</label>
+          <input
+            type="text"
+            name="content"
+            onChange={(e) => handleInput(e)}
+            value={momentDetails.content}
+          />
 
-      <input
-        type="file"
-        name="image-upload"
-        onChange={(e) => {
-          setImageToBeUploaded(e.target.files);
-        }}
-      />
-      {imgUrl && <p>Image uploaded.</p>}
-      <button type="submit">Submit</button>
-    </form>
+          <input
+            type="file"
+            name="image-upload"
+            onChange={(e) => {
+              setImageToBeUploaded(e.target.files);
+            }}
+          />
+          {imgUrl && <p>Image uploaded.</p>}
+          <button type="submit">Submit</button>
+        </form>
+      </div>
+    </div>
   );
 };
 

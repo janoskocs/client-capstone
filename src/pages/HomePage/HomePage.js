@@ -50,13 +50,7 @@ const HomePage = () => {
 
   return (
     <section className="home">
-      <div className="collapsible">
-        <input id="collapsible1" type="checkbox" name="collapsible" />
-        <label htmlFor="collapsible1">Capture the moment</label>
-        <div className="collapsible-body">
-          <MomentForm getMoments={getMoments} />
-        </div>
-      </div>
+      <MomentForm getMoments={getMoments} />
 
       <section className="" style={{ width: "100vw", height: "60vh" }}>
         <ReactFlowProvider>
