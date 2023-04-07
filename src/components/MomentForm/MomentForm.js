@@ -1,18 +1,23 @@
-import { useEffect, useState } from "react";
-import { initializeApp } from "firebase/app";
+import { useState } from "react";
 import axios from "axios";
 import { useAuthContext } from "../../hooks/useAuthContext";
+import { useUploadImage } from "../../hooks/useUploadImage";
 
 const MomentForm = ({ getMoments }) => {
+  const { uploadImage, isUploading, imgUrl } = useUploadImage();
+
+  //Get user from context
   const { user } = useAuthContext();
 
-  const [imageToBeUploaded, setImageToBeUploaded] = useState(null);
+  //Initialise input states
   const [momentDetails, setMomentDetails] = useState({
     title: "",
     content: "",
   });
+  const [imageToBeUploaded, setImageToBeUploaded] = useState(null);
 
   const [mood, setMood] = useState({ mood: 15 }); // sets the mood :D
+
   const [error, setError] = useState(false);
 
   const handleInput = (e) => {
@@ -22,13 +27,16 @@ const MomentForm = ({ getMoments }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    await uploadImage(imageToBeUploaded);
+
     if (!user) {
       setError("You must be logged in.");
-      return;
+      return <p>{error}</p>;
     }
     const moment = { ...momentDetails, ...mood };
 
     try {
+      // uploadImage(imageToBeUploaded[0]);
       const { data } = await axios.post(
         `${process.env.REACT_APP_SERVER_URL}api/moments/`,
         moment,
@@ -43,6 +51,7 @@ const MomentForm = ({ getMoments }) => {
       console.log(error);
     }
   };
+
   return (
     <form className="form" onSubmit={handleSubmit}>
       <h3 className="form__title">Capture a moment</h3>
@@ -65,10 +74,10 @@ const MomentForm = ({ getMoments }) => {
         type="file"
         name="image-upload"
         onChange={(e) => {
-          setImageToBeUploaded(e.target);
+          setImageToBeUploaded(e.target.files);
         }}
       />
-      <button>Submit</button>
+      <button type="submit">Submit</button>
     </form>
   );
 };

@@ -35,7 +35,7 @@ const HomePage = () => {
           },
         }
       );
-      console.log(data);
+
       setMomentsList(data);
     } catch (error) {
       console.log(error);
@@ -51,7 +51,6 @@ const HomePage = () => {
   //Board related
   useEffect(() => {
     const nodeArrayOfMoments = [];
-    console.log(momentsList);
 
     //Once we have momentList array then loop over it
     if (momentsList) {
@@ -64,7 +63,6 @@ const HomePage = () => {
         };
         nodeArrayOfMoments.push(momentNode);
       });
-      console.log(nodeArrayOfMoments);
     }
 
     /*
