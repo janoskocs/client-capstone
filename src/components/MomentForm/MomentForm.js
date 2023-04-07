@@ -1,21 +1,19 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import { useUploadImage } from "../../hooks/useUploadImage";
 
 const MomentForm = ({ getMoments }) => {
-  const { uploadImage, isUploading, imgUrl, uploadError } = useUploadImage();
-
   //Get user from context
   const { user } = useAuthContext();
 
   //Initialise input states
+  const { uploadImage, isUploading, uploadError, imgUrl } = useUploadImage();
   const [momentDetails, setMomentDetails] = useState({
     title: "",
     content: "",
   });
   const [imageToBeUploaded, setImageToBeUploaded] = useState(null);
-
   const [mood, setMood] = useState({ mood: 15 }); // sets the mood :D
 
   const [error, setError] = useState(false);
@@ -33,13 +31,16 @@ const MomentForm = ({ getMoments }) => {
     }
 
     try {
-      await uploadImage(imageToBeUploaded);
+      //Uploads image and returns its url
+      const url = await uploadImage(imageToBeUploaded);
+      const moment = { ...momentDetails, ...mood, image_url: url };
+      postMoment(moment);
     } catch (error) {
       return <p>Something went wrong. {error}</p>;
     }
+  };
 
-    const moment = { ...momentDetails, ...mood };
-
+  const postMoment = async (moment) => {
     try {
       const { data } = await axios.post(
         `${process.env.REACT_APP_SERVER_URL}api/moments/`,

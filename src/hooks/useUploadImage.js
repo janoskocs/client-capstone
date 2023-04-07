@@ -4,7 +4,7 @@ import { useState } from "react";
 import { v4 } from "uuid";
 
 export const useUploadImage = () => {
-  const [isUploading, setIsUploading] = useState(false);
+  const [isUploading, setIsUploading] = useState(true);
   const [imgUrl, setImgUrl] = useState(null);
   const [uploadError, setUploadError] = useState(null);
   //Firebase configuration
@@ -34,23 +34,16 @@ export const useUploadImage = () => {
     //Create a storage ref for the new image, it's like a variable in Firebase for the image
     const uniqueId = v4();
     const storageRef = ref(storage, `moments/${uniqueId}${imageFile[0].name}`);
-
     try {
-      setIsUploading(true);
       const upload = await uploadBytes(storageRef, imageFile[0]);
-
-      if (upload.name === imageFile[0].name) {
-        setIsUploading(false);
-        console.log("Image uploaded");
-      }
-      const url = await getDownloadURL(ref(storage, storageRef.fullPath));
-      if (url) {
-        setImgUrl(url);
-      }
     } catch (error) {
       setUploadError(error);
     }
+    //Returns the url of the uploaded image
+    const url = await getDownloadURL(ref(storage, storageRef.fullPath));
+    setIsUploading(false);
+    return url;
   };
 
-  return { uploadImage, isUploading, imgUrl, uploadError };
+  return { uploadImage, isUploading, uploadError };
 };
