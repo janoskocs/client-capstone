@@ -23,6 +23,9 @@ const HomePage = () => {
     }
   }, [user]);
 
+  const randomNumber = (x) => {
+    return Math.floor(Math.random() * x) + 1;
+  };
   //Board related
   useEffect(() => {
     const nodeArrayOfMoments = [];
@@ -32,7 +35,7 @@ const HomePage = () => {
       momentsList.forEach((moment, index) => {
         const momentNode = {
           id: index.toString(),
-          position: { x: 0, y: index + 10 },
+          position: { x: randomNumber(1000), y: randomNumber(200) },
           type: "momentNode",
           data: { data: moment },
         };

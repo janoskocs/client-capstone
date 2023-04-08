@@ -36,7 +36,6 @@ const MomentNode = ({ data }) => {
   return (
     <>
       <section className="moment">
-        <h4 className="moment__title">{data.data.title}</h4>
         <img
           src={data.data.image_url}
           alt="User media"

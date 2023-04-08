@@ -13,11 +13,9 @@ const MomentForm = ({ getMoments }) => {
   //Initialise input states
   const { uploadImage, imgUrl } = useUploadImage();
   const [momentDetails, setMomentDetails] = useState({
-    title: "",
     content: "",
   });
   const [imageToBeUploaded, setImageToBeUploaded] = useState(null);
-  const [mood, setMood] = useState({ mood: 15 }); // sets the mood :D
 
   const [error, setError] = useState(false);
 
@@ -36,7 +34,8 @@ const MomentForm = ({ getMoments }) => {
     try {
       //Uploads image and returns its url
       const url = await uploadImage(imageToBeUploaded);
-      const moment = { ...momentDetails, ...mood, image_url: url };
+      const moment = { ...momentDetails, image_url: url };
+      console.log("here");
       postMoment(moment);
     } catch (error) {
       return <p>Something went wrong. {error}</p>;
@@ -79,13 +78,7 @@ const MomentForm = ({ getMoments }) => {
       <div className="collapsible-body">
         <form className="form" onSubmit={handleSubmit}>
           <h3 className="form__title">Capture a moment</h3>
-          <label htmlFor="title">Title</label>
-          <input
-            type="text"
-            name="title"
-            onChange={(e) => handleInput(e)}
-            value={momentDetails.title}
-          />
+
           <label htmlFor="content">Content</label>
           <input
             type="text"
