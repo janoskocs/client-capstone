@@ -20,7 +20,6 @@ const HomePage = () => {
     if (user) {
       getMoments();
     }
-
     //Disable warnings on dependency, it's all good :D
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
