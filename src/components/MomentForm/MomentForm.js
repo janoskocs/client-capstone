@@ -72,7 +72,7 @@ const MomentForm = ({ getMoments }) => {
         type="checkbox"
         name="collapsible"
         checked={isCollapsed}
-        onClick={(e) => setIsCollapsed(!isCollapsed)}
+        onChange={() => setIsCollapsed(!isCollapsed)}
       />
       <label htmlFor="collapsible1">{uploadStatusMessage}</label>
       <div className="collapsible-body">

@@ -17,7 +17,7 @@ const MomentNode = ({ data }) => {
 
   const handleDelete = async (_id) => {
     try {
-      const { data } = await axios.delete(
+      await axios.delete(
         `${process.env.REACT_APP_SERVER_URL}api/moments/${_id}`,
         {
           headers: {

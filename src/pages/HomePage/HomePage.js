@@ -1,6 +1,5 @@
 import "./HomePage.scss";
-import React, { useEffect, useState, useMemo } from "react";
-import axios from "axios";
+import React, { useEffect, useMemo } from "react";
 
 import { useAuthContext } from "../../hooks/useAuthContext";
 //Components
@@ -21,6 +20,9 @@ const HomePage = () => {
     if (user) {
       getMoments();
     }
+
+    //Disable warnings on dependency, it's all good :D
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
 
   const randomNumber = (x) => {
@@ -44,6 +46,8 @@ const HomePage = () => {
     }
 
     setNodes(nodeArrayOfMoments);
+    //Disable warnings on dependency, it's all good :D
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [momentsList]);
 
   const initialNode = [
