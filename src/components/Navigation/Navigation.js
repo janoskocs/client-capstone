@@ -33,7 +33,8 @@ const Navigation = () => {
 
         {user && (
           <>
-            <Link to="/friends">Friends</Link>
+            <Link to="/followers">Followers</Link>
+            <Link to="/followers/board">View my friends board</Link>
             <p>{user.email}</p> <button onClick={handleLogout}>Log out</button>{" "}
           </>
         )}

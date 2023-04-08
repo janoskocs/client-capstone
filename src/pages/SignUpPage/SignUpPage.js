@@ -9,6 +9,10 @@ const SignUpPage = () => {
     last_name: "",
   });
 
+  const [avatar, setAvatar] = useState(
+    "https://firebasestorage.googleapis.com/v0/b/memovault-9a89c.appspot.com/o/moments%2Favatar1.png?alt=media&token=d408c88a-5c2a-40bc-8cba-f54332e66b02"
+  );
+
   const { signup, error, isLoading } = useSignUp();
   const handleInput = (e) => {
     setSignUpInput({ ...signUpInput, [e.target.name]: e.target.value });
@@ -21,7 +25,8 @@ const SignUpPage = () => {
       signUpInput.email,
       signUpInput.password,
       signUpInput.first_name,
-      signUpInput.last_name
+      signUpInput.last_name,
+      avatar
     );
   };
   return (
