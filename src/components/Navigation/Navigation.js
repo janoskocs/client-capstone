@@ -35,7 +35,17 @@ const Navigation = () => {
           <>
             <Link to="/followers">Followers</Link>
             <Link to="/followers/board">View my friends board</Link>
-            <p>{user.email}</p> <button onClick={handleLogout}>Log out</button>{" "}
+            <Link to="/">
+              <section className="loggedon-user">
+                <img
+                  className="loggedon-user__img"
+                  src={user.avatar}
+                  alt="Logged on user."
+                />
+                <p className="loggedon-user__name">{user.email}</p>
+              </section>
+            </Link>
+            <button onClick={handleLogout}>Log out</button>{" "}
           </>
         )}
       </div>

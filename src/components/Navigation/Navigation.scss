@@ -39,3 +39,11 @@
     }
   }
 }
+
+.loggedon-user {
+  @include displayFlex(null, null, center, center);
+  &__img {
+    width: 2rem;
+    margin-right: 1rem;
+  }
+}
