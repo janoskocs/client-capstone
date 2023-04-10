@@ -28,8 +28,6 @@ const Followers = () => {
     getFollowers();
   }, []);
 
-  console.log(peopleIfollow);
-
   useEffect(() => {}, [peopleIfollow]);
 
   if (!peopleIfollow) {

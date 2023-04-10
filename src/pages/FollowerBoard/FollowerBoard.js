@@ -1,23 +1,45 @@
 import { useParams } from "react-router-dom";
-import "./FollowerBoard.scss";
 import { useGetMoments } from "../../hooks/useGetMoments";
 import { useEffect, useState } from "react";
+import axios from "axios";
+import { useAuthContext } from "../../hooks/useAuthContext";
+import Board from "../../components/Board/Board";
+import "./FollowerBoard.scss";
 
 const FollowerBoard = () => {
+  const { user } = useAuthContext();
   const { momentsList, getMoments } = useGetMoments();
   const { followerId } = useParams();
+
+  const [followerDetails, setFollowerDetails] = useState(null);
 
   useEffect(() => {
     getMoments(followerId);
   }, []);
 
+  useEffect(() => {
+    const getFollowerDetails = async () => {
+      const { data } = await axios.get(
+        `${process.env.REACT_APP_SERVER_URL}api/user/allusers/shortened/${followerId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${user.token}`,
+          },
+        }
+      );
+
+      setFollowerDetails(data[0]);
+    };
+    getFollowerDetails();
+  }, []);
+
   if (!momentsList) {
-    console.log("notloaded");
     return <p>Loading..</p>;
   }
 
-  console.log(momentsList);
-  return <div>FollowerBoard</div>;
+  return (
+    <Board momentsList={momentsList} firstName={followerDetails.first_name} />
+  );
 };
 
 export default FollowerBoard;
