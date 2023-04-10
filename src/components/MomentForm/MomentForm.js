@@ -55,7 +55,7 @@ const MomentForm = ({ getMoments }) => {
       );
       setIsCollapsed(false);
       setUploadStatusMessage("Moment captured ✅");
-      getMoments();
+      getMoments(user._id);
 
       setTimeout(() => {
         setUploadStatusMessage("Capture the moment");

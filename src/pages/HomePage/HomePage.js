@@ -18,7 +18,7 @@ const HomePage = () => {
 
   useEffect(() => {
     if (user) {
-      getMoments();
+      getMoments(user._id);
     }
     //Disable warnings on dependency, it's all good :D
     // eslint-disable-next-line react-hooks/exhaustive-deps
