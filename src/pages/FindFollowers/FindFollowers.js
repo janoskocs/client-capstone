@@ -30,6 +30,25 @@ const FindFollowers = () => {
     getUsers();
   }, [input]);
 
+  const handleFollow = async (follower_id) => {
+    try {
+      const { data } = await axios.patch(
+        `${process.env.REACT_APP_SERVER_URL}api/user/allusers/${user._id}`,
+        {
+          follower_id: follower_id,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${user.token}`,
+          },
+        }
+      );
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div className="wrapper">
       <section className="page">
@@ -61,7 +80,9 @@ const FindFollowers = () => {
                     <p>{result.first_name}</p>
                     <p>{result.last_name}</p>
                   </div>
-                  <button>Follow</button>
+                  <button onClick={() => handleFollow(result._id)}>
+                    Follow
+                  </button>
                 </article>
               );
             })}
