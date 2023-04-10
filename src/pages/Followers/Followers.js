@@ -1,15 +1,16 @@
-import "./Followers.scss";
 import axios from "axios";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import "./Followers.scss";
 
 const Followers = () => {
   const { user } = useAuthContext();
 
   const [peopleIfollow, setPeopleIfollow] = useState(null);
+  const [myFollowers, setMyFollowers] = useState(null);
 
-  const getFollowers = async () => {
+  const getPeopleIFollow = async () => {
     try {
       const { data } = await axios.get(
         `${process.env.REACT_APP_SERVER_URL}api/user/allusers/shortened`,
@@ -24,59 +25,117 @@ const Followers = () => {
       console.log(error);
     }
   };
+
+  const getMyFollowers = async () => {
+    try {
+      const { data } = await axios.get(
+        `${process.env.REACT_APP_SERVER_URL}api/user/allusers/shortened/myfollowers`,
+        {
+          headers: {
+            Authorization: `Bearer ${user.token}`,
+          },
+        }
+      );
+      setMyFollowers(data);
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   useEffect(() => {
-    getFollowers();
+    getPeopleIFollow();
+    getMyFollowers();
   }, []);
 
   useEffect(() => {}, [peopleIfollow]);
+
+  const handleUnfollow = async (follower_id) => {
+    try {
+      const { data } = await axios.patch(
+        `${process.env.REACT_APP_SERVER_URL}api/user/allusers/unfollow/${user._id}`,
+        {
+          follower_id: follower_id,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${user.token}`,
+          },
+        }
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   if (!peopleIfollow) {
     return <p>Loading...</p>;
   }
 
-  const iFollow = peopleIfollow.map((person) => {
+  const iFollowJSX = peopleIfollow.map((person) => {
     return (
-      <article className="person" key={person._id}>
-        <Link to={`/followers/board/${person._id}`}>
-          <img className="person__avatar" src={person.avatar} alt="Avatar" />
-          <p className="person__text">
-            {person.first_name} {person.last_name}
-          </p>
-        </Link>
-        <button className="person__btn" type="button">
-          Unfollow
-        </button>
+      <article key={person._id} className="follower">
+        <div className="follower__side">
+          <Link
+            className="follower__link"
+            to={`/followers/board/${person._id}`}
+          >
+            <img
+              className="follower__avatar"
+              src={person.avatar}
+              alt="User avatar"
+            />
+            Visit board
+          </Link>
+        </div>
+        <div className="follower__side">
+          <p>{person.first_name}</p>
+          <p>{person.last_name}</p>
+        </div>
+
+        <button onClick={() => handleUnfollow(person._id)}>Unfollow</button>
       </article>
     );
   });
 
-  //Need to implement my followers
-  const myFollowers = peopleIfollow.map((person) => {
+  const myFollowersJSX = myFollowers.map((person) => {
     return (
-      <article className="person" key={person._id}>
-        <Link to={`/${person._id}`}>
-          <img className="person__avatar" src={person.avatar} alt="Avatar" />
-          <p className="person__text">
-            {person.first_name} {person.last_name}
-          </p>
-        </Link>
-        <button className="person__btn" type="button">
-          Unfollow
-        </button>
+      <article key={person._id} className="follower">
+        <div className="follower__side">
+          <Link
+            className="follower__link"
+            to={`/followers/board/${person._id}`}
+          >
+            <img
+              className="follower__avatar"
+              src={person.avatar}
+              alt="User avatar"
+            />
+            Visit board
+          </Link>
+        </div>
+        <div className="follower__side">
+          <p>{person.first_name}</p>
+          <p>{person.last_name}</p>
+        </div>
+
+        <button onClick={() => handleUnfollow(person._id)}>Unfollow</button>
       </article>
     );
   });
 
   return (
-    <>
-      <section className="followers">
-        <h4>People I follow</h4>
-        {iFollow}
+    <div className="wrapper">
+      <section className="page">
+        <section className="followers">
+          <h4 className="followers__title">People I follow</h4>
+          {iFollowJSX}
+        </section>
+        <section className="followers">
+          <h4>My followers</h4>
+          {myFollowersJSX}
+        </section>
       </section>
-      <section className="followers">
-        <h4>My followers</h4>
-      </section>
-    </>
+    </div>
   );
 };
 
