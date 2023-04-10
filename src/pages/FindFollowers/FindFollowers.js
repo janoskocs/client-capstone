@@ -9,34 +9,34 @@ const FindFollowers = () => {
   const [peopleIFollow, setPeopleIFollow] = useState(null);
   const [searchResults, setSearchResults] = useState(null);
 
-  useEffect(() => {
-    const getUsers = async () => {
-      const { data } = await axios.post(
-        `${process.env.REACT_APP_SERVER_URL}api/user/allusers/search`,
-        {
-          searchInput: input,
+  const getUsers = async () => {
+    const { data } = await axios.post(
+      `${process.env.REACT_APP_SERVER_URL}api/user/allusers/search`,
+      {
+        searchInput: input,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${user.token}`,
         },
-        {
-          headers: {
-            Authorization: `Bearer ${user.token}`,
-          },
-        }
-      );
-      setSearchResults(data);
-    };
+      }
+    );
+    setSearchResults(data);
+  };
 
-    const getPeopleIFollow = async () => {
-      const { data } = await axios.get(
-        `${process.env.REACT_APP_SERVER_URL}api/user/allusers/shortened`,
-        {
-          headers: {
-            Authorization: `Bearer ${user.token}`,
-          },
-        }
-      );
-      setPeopleIFollow(data);
-    };
+  const getPeopleIFollow = async () => {
+    const { data } = await axios.get(
+      `${process.env.REACT_APP_SERVER_URL}api/user/allusers/shortened`,
+      {
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+        },
+      }
+    );
+    setPeopleIFollow(data);
+  };
 
+  useEffect(() => {
     if (!input) {
       return;
     }
@@ -57,41 +57,33 @@ const FindFollowers = () => {
           },
         }
       );
-      console.log(data);
+      getPeopleIFollow();
+      getUsers();
     } catch (error) {
       console.log(error);
     }
   };
 
-  // const filteredResults =
-  //   searchResults &&
-  //   searchResults.map((result) => {
-  //     return (
-  //       <article key={result._id} className="result">
-  //         <div className="result__side">
-  //           <img
-  //             className="result__avatar"
-  //             src={result.avatar}
-  //             alt="User avatar"
-  //           />
-  //         </div>
-  //         <div className="result__side">
-  //           <p>{result.first_name}</p>
-  //           <p>{result.last_name}</p>
-  //         </div>
-  //         {peopleIFollow &&
-  //           peopleIFollow.map((person) => {
-  //             return person._id === result._id ? (
-  //               <button onClick={() => handleFollow(result._id)}>
-  //                 Unfollow
-  //               </button>
-  //             ) : (
-  //               <button onClick={() => handleFollow(result._id)}>Follow</button>
-  //             );
-  //           })}
-  //       </article>
-  //     );
-  //   });
+  const handleUnfollow = async (follower_id) => {
+    try {
+      const { data } = await axios.patch(
+        `${process.env.REACT_APP_SERVER_URL}api/user/allusers/unfollow/${user._id}`,
+        {
+          follower_id: follower_id,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${user.token}`,
+          },
+        }
+      );
+      getPeopleIFollow();
+      getUsers();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const filteredResults =
     searchResults &&
     searchResults.map((result) => {
@@ -112,7 +104,7 @@ const FindFollowers = () => {
             <p>{result.last_name}</p>
           </div>
           {personIFollow ? (
-            <button onClick={() => handleFollow(result._id)}>Unfollow</button>
+            <button onClick={() => handleUnfollow(result._id)}>Unfollow</button>
           ) : (
             <button onClick={() => handleFollow(result._id)}>Follow</button>
           )}
