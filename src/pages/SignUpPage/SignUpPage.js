@@ -162,7 +162,7 @@ const SignUpPage = () => {
         </div>
       </fieldset>
 
-      {error && <p>{error}</p>}
+      {error && <p className="error">{error}</p>}
       <p>
         Password must contain a lowercase letter, uppercase letter, number, and
         a symbol.
