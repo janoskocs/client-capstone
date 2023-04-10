@@ -33,6 +33,15 @@ const MomentNode = ({ data }) => {
   if (deleted) {
     return;
   }
+  const appreciateString =
+    data.data.appreciatedBy.length === 0
+      ? ``
+      : `Appreciated by ${
+          data.data.appreciatedBy.length === 1
+            ? `1 person.`
+            : `${data.data.appreciatedBy.length} people.`
+        }`;
+
   return (
     <>
       <section className="moment">
@@ -45,6 +54,7 @@ const MomentNode = ({ data }) => {
           <span className="moment__user">{user.first_name} </span>
           {data.data.content}
         </p>
+        <p>{appreciateString}</p>
         <TimeAgo date={data.data.createdAt} />
 
         <NodeToolbar isVisible={data.toolbarVisible} position={"bottom"}>
