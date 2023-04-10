@@ -8,6 +8,7 @@
   &__wrapper {
     width: 80%;
     margin: 0 auto;
+
     @include displayFlex(null, space-between, center);
   }
   &__section-container {

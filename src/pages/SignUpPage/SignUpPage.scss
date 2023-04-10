@@ -1,0 +1,22 @@
+@use "../../styles/mixins" as *;
+@use "../../styles/variables" as *;
+
+.fieldset {
+  &__container {
+    @include displayFlex();
+  }
+
+  &__card {
+    padding: 0.25rem;
+    &--selected {
+      background-color: $secondary-brand;
+    }
+  }
+  &__img {
+    cursor: pointer;
+  }
+
+  &__input-radio {
+    display: none;
+  }
+}
