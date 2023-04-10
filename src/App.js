@@ -6,6 +6,7 @@ import Navigation from "./components/Navigation/Navigation";
 import LogInPage from "./pages/LogInPage/LogInPage";
 import SignUpPage from "./pages/SignUpPage/SignUpPage";
 import FriendsPage from "./pages/FriendsPage/FriendsPage";
+import Followers from "./pages/Followers/Followers";
 import FollowerBoard from "./pages/FollowerBoard/FollowerBoard";
 
 const App = () => {
@@ -36,6 +37,10 @@ const App = () => {
               />
               <Route
                 path="/followers/board"
+                element={user ? <Followers /> : <Navigate to="/" />}
+              />
+              <Route
+                path="/followers/board/:followerId"
                 element={user ? <FollowerBoard /> : <Navigate to="/" />}
               />
             </Routes>
