@@ -1,5 +1,10 @@
 @use "../../styles/mixins" as *;
+@use "../../styles/variables" as *;
 
+.wrapper {
+  background-color: $secondary-brand-light;
+  height: 100vh;
+}
 .page {
   width: 80%;
   margin: 0 auto;
@@ -11,14 +16,32 @@
   &__title {
     text-align: center;
     margin: 1rem;
+    padding-top: 1rem;
   }
 
   &__input {
     width: 100%;
+    background-color: $light;
   }
 }
 
 .results {
   text-align: center;
   margin: 2rem;
+}
+
+.result {
+  width: 15rem;
+  margin: 0.5rem auto;
+  cursor: pointer;
+  border-bottom-left-radius: 15px 255px;
+  border-bottom-right-radius: 225px 15px;
+  border-top-left-radius: 255px 15px;
+  border-top-right-radius: 15px 225px;
+  border: 1px solid black;
+  background-color: $light;
+  @include displayFlex(null, space-around, center);
+  &__avatar {
+    width: 5rem;
+  }
 }
