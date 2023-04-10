@@ -3,6 +3,8 @@ import axios from "axios";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import { useUploadImage } from "../../hooks/useUploadImage";
 
+import "./MomentForm.scss";
+
 const MomentForm = ({ getMoments }) => {
   //Get user from context
   const { user } = useAuthContext();
@@ -79,8 +81,9 @@ const MomentForm = ({ getMoments }) => {
         <form className="form" onSubmit={handleSubmit}>
           <h3 className="form__title">Capture a moment</h3>
 
-          <label htmlFor="content">Content</label>
           <input
+            className="form__text"
+            placeholder="Share this moment..."
             type="text"
             name="content"
             onChange={(e) => handleInput(e)}
@@ -88,14 +91,18 @@ const MomentForm = ({ getMoments }) => {
           />
 
           <input
+            className="form__file"
             type="file"
             name="image-upload"
             onChange={(e) => {
               setImageToBeUploaded(e.target.files);
             }}
           />
+
           {imgUrl && <p>Image uploaded.</p>}
-          <button type="submit">Submit</button>
+          <button className="form__submit btn-block" type="submit">
+            Capture this moment
+          </button>
         </form>
       </div>
     </div>
