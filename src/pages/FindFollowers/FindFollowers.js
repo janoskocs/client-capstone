@@ -1,10 +1,14 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useAuthContext } from "../../hooks/useAuthContext";
+import "./FindFollowers.scss";
 
-const FriendsPage = () => {
+const FindFollowers = () => {
   const { user } = useAuthContext();
   const [allUsers, setAllUsers] = useState(null);
+  const [searchResults, setSearchResults] = useState(
+    "Your search results will show up here."
+  );
 
   useEffect(() => {
     const getUsers = async () => {
@@ -22,32 +26,20 @@ const FriendsPage = () => {
     getUsers();
   }, []);
 
-  const followers =
-    !allUsers ||
-    allUsers.filter((person) => {
-      return person._id === user._id;
-    });
-
-  console.log(followers);
   return (
     <section className="page">
-      <h2 className="page__title">Friends</h2>
+      <div className="page__top">
+        <h2 className="page__title">Find new connections</h2>
+        <input
+          className="page__input"
+          type="text"
+          placeholder="Start typing to find followers..."
+        />
+      </div>
 
-      <section className="find-followers">
-        <input type="text" placeholder="Find followers..." />
-        <button type="button">Search</button>
-
-        {allUsers &&
-          allUsers.map((user) => {
-            return <p>{user.first_name}</p>;
-          })}
-      </section>
-
-      <section className="my-followers">
-        <h3>My followers</h3>
-      </section>
+      <section className="results">{searchResults}</section>
     </section>
   );
 };
 
-export default FriendsPage;
+export default FindFollowers;

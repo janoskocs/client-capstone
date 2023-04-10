@@ -1,0 +1,24 @@
+@use "../../styles/mixins" as *;
+
+.page {
+  width: 80%;
+  margin: 0 auto;
+
+  &__top {
+    width: 50%;
+    margin: 0 auto;
+  }
+  &__title {
+    text-align: center;
+    margin: 1rem;
+  }
+
+  &__input {
+    width: 100%;
+  }
+}
+
+.results {
+  text-align: center;
+  margin: 2rem;
+}
