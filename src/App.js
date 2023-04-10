@@ -13,41 +13,37 @@ const App = () => {
   const { user } = useAuthContext();
 
   return (
-    <>
-      <div className="App">
-        <div className="">
-          <BrowserRouter>
-            <Navigation />
-            <Routes>
-              <Route
-                path="/"
-                element={user ? <HomePage /> : <Navigate to="/login" />}
-              />
-              <Route
-                path="/login"
-                element={!user ? <LogInPage /> : <Navigate to="/" />}
-              />
-              <Route
-                path="/signup"
-                element={!user ? <SignUpPage /> : <Navigate to="/" />}
-              />
-              <Route
-                path="/followers"
-                element={user ? <FriendsPage /> : <Navigate to="/" />}
-              />
-              <Route
-                path="/followers/board"
-                element={user ? <Followers /> : <Navigate to="/" />}
-              />
-              <Route
-                path="/followers/board/:followerId"
-                element={user ? <FollowerBoard /> : <Navigate to="/" />}
-              />
-            </Routes>
-          </BrowserRouter>
-        </div>
-      </div>
-    </>
+    <div className="App">
+      <BrowserRouter>
+        <Navigation />
+        <Routes>
+          <Route
+            path="/"
+            element={user ? <HomePage /> : <Navigate to="/login" />}
+          />
+          <Route
+            path="/login"
+            element={!user ? <LogInPage /> : <Navigate to="/" />}
+          />
+          <Route
+            path="/signup"
+            element={!user ? <SignUpPage /> : <Navigate to="/" />}
+          />
+          <Route
+            path="/followers"
+            element={user ? <FriendsPage /> : <Navigate to="/" />}
+          />
+          <Route
+            path="/followers/board"
+            element={user ? <Followers /> : <Navigate to="/" />}
+          />
+          <Route
+            path="/followers/board/:followerId"
+            element={user ? <FollowerBoard /> : <Navigate to="/" />}
+          />
+        </Routes>
+      </BrowserRouter>
+    </div>
   );
 };
 

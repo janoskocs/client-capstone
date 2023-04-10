@@ -6,8 +6,8 @@
   @include displayFlex(null, space-between, center);
 
   &__wrapper {
-    width: 100%;
-    margin: 0;
+    width: 80%;
+    margin: 0 auto;
     @include displayFlex(null, space-between, center);
   }
   &__section-container {
@@ -16,16 +16,20 @@
     margin: 0;
   }
   &__logo {
-    width: 4rem;
+    width: 2.5rem;
     border: none;
   }
   &__title {
     @include font($font-title, $bold, 2rem, $primary-brand);
-    margin-left: 0.75rem;
+    margin: 0 0 0 0.75rem;
   }
 
   &__link {
-    text-decoration: none;
+    border-bottom: none;
+    &:hover {
+      border-bottom: none;
+      color: $primary-brand;
+    }
 
     &--cta {
       background-color: $secondary-brand;
@@ -38,6 +42,10 @@
       }
     }
   }
+  &__user {
+    width: 50%;
+    @include displayFlex(null, space-around, center, wrap);
+  }
 }
 
 .loggedon-user {
@@ -45,5 +53,9 @@
   &__img {
     width: 2rem;
     margin-right: 1rem;
+  }
+
+  &__name {
+    margin: 0;
   }
 }

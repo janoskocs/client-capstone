@@ -44,7 +44,7 @@ const Board = ({ momentsList, firstName }) => {
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNode);
 
   return (
-    <section className="" style={{ width: "100vw", height: "60vh" }}>
+    <section className="board board--friend">
       <ReactFlowProvider>
         <ReactFlow
           nodes={nodes}

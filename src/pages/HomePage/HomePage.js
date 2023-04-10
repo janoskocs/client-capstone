@@ -1,5 +1,5 @@
 import "./HomePage.scss";
-import React, { useEffect, useMemo } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 
 import { useAuthContext } from "../../hooks/useAuthContext";
 //Components
@@ -14,6 +14,7 @@ const HomePage = () => {
   const { user } = useAuthContext();
 
   const nodeTypes = useMemo(() => ({ momentNode: MomentNode }), []);
+  const [boardMoodColour, setBoardMoodColour] = useState("#fff");
   const { momentsList, getMoments } = useGetMoments();
 
   useEffect(() => {
@@ -45,6 +46,7 @@ const HomePage = () => {
     }
 
     setNodes(nodeArrayOfMoments);
+
     //Disable warnings on dependency, it's all good :D
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [momentsList]);
@@ -58,7 +60,7 @@ const HomePage = () => {
     <section className="home">
       <MomentForm getMoments={getMoments} />
 
-      <section className="" style={{ width: "100vw", height: "60vh" }}>
+      <section className="board">
         <ReactFlowProvider>
           <ReactFlow
             nodes={nodes}

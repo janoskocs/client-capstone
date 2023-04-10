@@ -1,11 +1,16 @@
-// .board {
+@use "../../styles/variables" as *;
+.board {
+  width: 100%;
+  height: 80vh;
+  background-color: $secondary-brand;
+
+  &--friend {
+    background-color: $primary-brand-light;
+  }
+}
+
+// .react-flow {
 //   background-image: url("../../assets/images/board.jpg");
 //   background-position: center;
 //   background-size: cover;
-//   width: 100%;
-// }
-
-// .moments {
-//   display: flex;
-//   width: 50rem;
 // }
