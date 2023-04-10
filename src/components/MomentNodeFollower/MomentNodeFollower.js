@@ -7,18 +7,21 @@ import TimeAgo from "react-timeago";
 
 const MomentNodeFollower = ({ data }) => {
   const { user } = useAuthContext();
-  //If moment is deleted, then send request to DB and hide this card
-  //If user refreshes, user will get updated board moments from DB
+
   const [appreciated, setAppreciated] = useState(false);
 
   if (!data.data) {
     return <p>Loading</p>;
   }
-
+  //If moment is appreciated, then send request to DB
+  //If user refreshes, user will get updated board moments from DB
   const handleAppreciate = async (_id) => {
     try {
       await axios.patch(
         `${process.env.REACT_APP_SERVER_URL}api/moments/appreciate/${_id}`,
+        {
+          friend_id: user._id,
+        },
         {
           headers: {
             Authorization: `Bearer ${user.token}`,
@@ -30,9 +33,15 @@ const MomentNodeFollower = ({ data }) => {
       console.log(error);
     }
   };
-  if (appreciated) {
-    return;
-  }
+
+  const appreciateString =
+    data.data.appreciatedBy.length === 0
+      ? `Be the first to appreciate this moment.`
+      : `Appreciated by ${
+          data.data.appreciatedBy.length === 1
+            ? `1 person.`
+            : `${data.data.appreciatedBy.length} people.`
+        }`;
 
   return (
     <>
@@ -46,6 +55,7 @@ const MomentNodeFollower = ({ data }) => {
           <span className="moment__user">{data.data.name} </span>
           {data.data.content}
         </p>
+        <p>{appreciateString}</p>
         <TimeAgo date={data.data.createdAt} />
         <NodeToolbar isVisible={data.toolbarVisible} position={"bottom"}>
           <div className="moment__actions">
@@ -53,7 +63,7 @@ const MomentNodeFollower = ({ data }) => {
               type="button"
               onClick={(e) => handleAppreciate(data.data._id)}
             >
-              Appreciate
+              {appreciated ? "Appreciated" : "Appreciate"}
             </button>
           </div>
         </NodeToolbar>

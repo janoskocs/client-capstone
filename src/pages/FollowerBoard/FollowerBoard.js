@@ -27,7 +27,6 @@ const FollowerBoard = () => {
           },
         }
       );
-
       setFollowerDetails(data[0]);
     };
     getFollowerDetails();
@@ -35,6 +34,9 @@ const FollowerBoard = () => {
 
   if (!momentsList) {
     return <p>Loading..</p>;
+  }
+  if (!followerDetails) {
+    return <p>Loading...</p>;
   }
 
   return (
