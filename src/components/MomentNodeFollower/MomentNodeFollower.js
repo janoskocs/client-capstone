@@ -2,14 +2,17 @@ import "./MomentNodeFollower.scss";
 import { NodeToolbar } from "reactflow";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import TimeAgo from "react-timeago";
 
 const MomentNodeFollower = ({ data }) => {
   const { user } = useAuthContext();
 
   const [appreciated, setAppreciated] = useState(false);
-
+  const [appreciationCount, setAppreciationCount] = useState();
+  useEffect(() => {
+    setAppreciationCount(data.data.appreciatedBy.length);
+  }, []);
   if (!data.data) {
     return <p>Loading</p>;
   }
@@ -28,6 +31,9 @@ const MomentNodeFollower = ({ data }) => {
           },
         }
       );
+      if (!appreciated) {
+        setAppreciationCount(appreciationCount + 1);
+      }
       setAppreciated(true);
     } catch (error) {
       console.log(error);
@@ -35,12 +41,10 @@ const MomentNodeFollower = ({ data }) => {
   };
 
   const appreciateString =
-    data.data.appreciatedBy.length === 0
+    appreciationCount === 0
       ? `Be the first to appreciate this moment.`
       : `Appreciated by ${
-          data.data.appreciatedBy.length === 1
-            ? `1 person.`
-            : `${data.data.appreciatedBy.length} people.`
+          appreciationCount === 1 ? `1 person.` : `${appreciationCount} people.`
         }`;
 
   return (
@@ -62,6 +66,7 @@ const MomentNodeFollower = ({ data }) => {
             <button
               type="button"
               onClick={(e) => handleAppreciate(data.data._id)}
+              disabled={appreciated}
             >
               {appreciated ? "Appreciated" : "Appreciate"}
             </button>
