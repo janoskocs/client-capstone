@@ -79,11 +79,11 @@ const MomentForm = ({ getMoments }) => {
       <label htmlFor="collapsible1">{uploadStatusMessage}</label>
       <div className="collapsible-body">
         <form className="form" onSubmit={handleSubmit}>
-          <h3 className="form__title">Capture a moment</h3>
+          <h3 className="form__title">Capture this moment</h3>
 
           <input
             className="form__text"
-            placeholder="Share this moment..."
+            placeholder="Write something here to share this moment..."
             type="text"
             name="content"
             onChange={(e) => handleInput(e)}
