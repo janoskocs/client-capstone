@@ -20,33 +20,44 @@ const LogInPage = () => {
     await login(loginInput.email, loginInput.password);
   };
   return (
-    <section className="login">
-      <div className="hero">
-        <h1 className="hero__title">Capture every moment.</h1>
-        <img className="hero__img" src={hero} alt="Hero" />
-      </div>
-      <form className="login-form" onSubmit={handleLogin}>
-        <h3 className="login-form__title">Log in</h3>
-        <label htmlFor="email">Email</label>
-        <input
-          type="email"
-          name="email"
-          onChange={(e) => handleInput(e)}
-          value={loginInput.email}
-        />
-        <label htmlFor="password">Password</label>
-        <input
-          type="password"
-          name="password"
-          onChange={(e) => handleInput(e)}
-          value={loginInput.password}
-        />
-        {error && <p className="error">{error}</p>}
-        <button className="login-form__btn" disabled={isLoading} type="submit">
-          Log In
-        </button>
-      </form>
-    </section>
+    <>
+      <section className="login">
+        <div className="hero">
+          <h1 className="hero__title">Capture every moment.</h1>
+          <img className="hero__img" src={hero} alt="Hero" />
+        </div>
+        <form className="login-form" onSubmit={handleLogin}>
+          <h3 className="login-form__title">Log in</h3>
+          <label htmlFor="email">Email</label>
+          <input
+            type="email"
+            name="email"
+            onChange={(e) => handleInput(e)}
+            value={loginInput.email}
+          />
+          <label htmlFor="password">Password</label>
+          <input
+            type="password"
+            name="password"
+            onChange={(e) => handleInput(e)}
+            value={loginInput.password}
+          />
+          {error && <p className="error">{error}</p>}
+          <button
+            className="login-form__btn"
+            disabled={isLoading}
+            type="submit"
+          >
+            Log In
+          </button>
+        </form>
+      </section>
+      <section className="landing">
+        <div className="landing__wrapper">
+          <h3 className="landing__title">Store your memories with emotions</h3>
+        </div>
+      </section>
+    </>
   );
 };
 
