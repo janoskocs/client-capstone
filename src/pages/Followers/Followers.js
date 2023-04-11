@@ -71,57 +71,61 @@ const Followers = () => {
     return <p>Loading...</p>;
   }
 
-  const iFollowJSX = peopleIfollow.map((person) => {
-    return (
-      <article key={person._id} className="follower">
-        <div className="follower__side">
-          <Link
-            className="follower__link"
-            to={`/followers/board/${person._id}`}
-          >
-            <img
-              className="follower__avatar"
-              src={person.avatar}
-              alt="User avatar"
-            />
-            Visit board
-          </Link>
-        </div>
-        <div className="follower__side">
-          <p>{person.first_name}</p>
-          <p>{person.last_name}</p>
-        </div>
+  const iFollowJSX =
+    peopleIfollow &&
+    peopleIfollow.map((person) => {
+      return (
+        <article key={person._id} className="follower">
+          <div className="follower__side">
+            <Link
+              className="follower__link"
+              to={`/followers/board/${person._id}`}
+            >
+              <img
+                className="follower__avatar"
+                src={person.avatar}
+                alt="User avatar"
+              />
+              Visit board
+            </Link>
+          </div>
+          <div className="follower__side">
+            <p>{person.first_name}</p>
+            <p>{person.last_name}</p>
+          </div>
 
-        <button onClick={() => handleUnfollow(person._id)}>Unfollow</button>
-      </article>
-    );
-  });
+          <button onClick={() => handleUnfollow(person._id)}>Unfollow</button>
+        </article>
+      );
+    });
 
-  const myFollowersJSX = myFollowers.map((person) => {
-    return (
-      <article key={person._id} className="follower">
-        <div className="follower__side">
-          <Link
-            className="follower__link"
-            to={`/followers/board/${person._id}`}
-          >
-            <img
-              className="follower__avatar"
-              src={person.avatar}
-              alt="User avatar"
-            />
-            Visit board
-          </Link>
-        </div>
-        <div className="follower__side">
-          <p>{person.first_name}</p>
-          <p>{person.last_name}</p>
-        </div>
+  const myFollowersJSX =
+    myFollowers &&
+    myFollowers.map((person) => {
+      return (
+        <article key={person._id} className="follower">
+          <div className="follower__side">
+            <Link
+              className="follower__link"
+              to={`/followers/board/${person._id}`}
+            >
+              <img
+                className="follower__avatar"
+                src={person.avatar}
+                alt="User avatar"
+              />
+              Visit board
+            </Link>
+          </div>
+          <div className="follower__side">
+            <p>{person.first_name}</p>
+            <p>{person.last_name}</p>
+          </div>
 
-        <button onClick={() => handleUnfollow(person._id)}>Unfollow</button>
-      </article>
-    );
-  });
+          <button onClick={() => handleUnfollow(person._id)}>Unfollow</button>
+        </article>
+      );
+    });
 
   return (
     <div className="wrapper">
