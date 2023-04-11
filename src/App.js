@@ -8,6 +8,7 @@ import SignUpPage from "./pages/SignUpPage/SignUpPage";
 import Followers from "./pages/Followers/Followers";
 import FollowerBoard from "./pages/FollowerBoard/FollowerBoard";
 import FindFollowers from "./pages/FindFollowers/FindFollowers";
+import MoodPage from "./pages/MoodPage/MoodPage";
 
 const App = () => {
   const { user } = useAuthContext();
@@ -20,6 +21,10 @@ const App = () => {
           <Route
             path="/"
             element={user ? <HomePage /> : <Navigate to="/login" />}
+          />
+          <Route
+            path="/mood"
+            element={user ? <MoodPage /> : <Navigate to="/" />}
           />
           <Route
             path="/login"
