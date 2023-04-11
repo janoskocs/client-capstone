@@ -49,6 +49,26 @@ const Followers = () => {
 
   useEffect(() => {}, [peopleIfollow]);
 
+  const handleFollow = async (follower_id) => {
+    try {
+      const { data } = await axios.patch(
+        `${process.env.REACT_APP_SERVER_URL}api/user/allusers/${user._id}`,
+        {
+          follower_id: follower_id,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${user.token}`,
+          },
+        }
+      );
+      getPeopleIFollow();
+      getMyFollowers();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const handleUnfollow = async (follower_id) => {
     try {
       const { data } = await axios.patch(
@@ -62,6 +82,8 @@ const Followers = () => {
           },
         }
       );
+      getPeopleIFollow();
+      getMyFollowers();
     } catch (error) {
       console.log(error);
     }
@@ -102,6 +124,9 @@ const Followers = () => {
   const myFollowersJSX =
     myFollowers &&
     myFollowers.map((person) => {
+      const personIFollow =
+        peopleIfollow &&
+        peopleIfollow.find((personIFollow) => personIFollow._id === person._id);
       return (
         <article key={person._id} className="follower">
           <div className="follower__side">
@@ -122,7 +147,11 @@ const Followers = () => {
             <p>{person.last_name}</p>
           </div>
 
-          <button onClick={() => handleUnfollow(person._id)}>Unfollow</button>
+          {personIFollow ? (
+            <button onClick={() => handleUnfollow(person._id)}>Unfollow</button>
+          ) : (
+            <button onClick={() => handleFollow(person._id)}>Follow</button>
+          )}
         </article>
       );
     });
