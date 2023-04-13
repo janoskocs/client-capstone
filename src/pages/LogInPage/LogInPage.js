@@ -2,6 +2,9 @@ import { useState } from "react";
 import { useLogin } from "../../hooks/useLogin";
 import "./LogInPage.scss";
 import hero from "../../assets/images/hero.gif";
+import image1 from "../../assets/images/pic1.png";
+import image2 from "../../assets/images/pic2.png";
+import image3 from "../../assets/images/pic3.png";
 
 const LogInPage = () => {
   const { login, error, isLoading } = useLogin();
@@ -55,8 +58,18 @@ const LogInPage = () => {
       <section className="landing">
         <div className="landing__wrapper">
           <h3 className="landing__title">Store your memories with emotions</h3>
+          <div className="landing__images">
+            <img className="landing__img" src={image1} alt="MemoVault" />
+            <img className="landing__img" src={image2} alt="MemoVault" />
+            <img className="landing__img" src={image3} alt="MemoVault" />
+          </div>
         </div>
       </section>
+      <p className="footer">
+        Thank you for visiting. This is a personal portfolio project. If you
+        want to know more visit me at{" "}
+        <a href="https://janoskocs.com">https://janoskocs.com</a>
+      </p>
     </>
   );
 };

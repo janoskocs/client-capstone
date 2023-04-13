@@ -44,4 +44,29 @@
 
 .landing {
   background-color: $primary-brand;
+
+  &__wrapper {
+    width: 80%;
+    margin: 0 auto;
+  }
+
+  &__title {
+    color: $light;
+    text-align: center;
+    padding: 2rem;
+  }
+  &__images {
+    display: flex;
+    justify-content: space-around;
+    padding-bottom: 2rem;
+  }
+
+  &__img {
+    width: 10rem;
+  }
+}
+
+.footer {
+  padding: 2rem;
+  text-align: center;
 }
