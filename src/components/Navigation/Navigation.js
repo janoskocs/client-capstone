@@ -41,7 +41,7 @@ const Navigation = () => {
                 My connections
               </Link>
               <Link className="nav__link" to="/mood">
-                Mood Swings
+                Reflect
               </Link>
               <Link className="nav__link" to="/">
                 <section className="loggedon-user">
