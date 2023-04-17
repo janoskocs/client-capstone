@@ -1,5 +1,8 @@
+@use "../../styles/responsive" as *;
 .mood {
-  width: 40%;
   margin: 0 auto;
   text-align: center;
+  @include tablet {
+    width: 80%;
+  }
 }
