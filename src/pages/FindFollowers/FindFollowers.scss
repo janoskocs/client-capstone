@@ -1,5 +1,6 @@
 @use "../../styles/mixins" as *;
 @use "../../styles/variables" as *;
+@use "../../styles/responsive" as *;
 
 .wrapper {
   background-color: $secondary-brand-light;
@@ -11,8 +12,11 @@
   margin: 0 auto;
 
   &__top {
-    width: 50%;
     margin: 0 auto;
+
+    @include tablet {
+      width: 50%;
+    }
   }
   &__title {
     text-align: center;
@@ -28,11 +32,12 @@
 
 .results {
   text-align: center;
-  margin: 2rem;
+  @include tablet {
+    margin: 2rem;
+  }
 }
 
 .result {
-  width: 15rem;
   margin: 0.5rem auto;
   cursor: pointer;
   border-bottom-left-radius: 15px 255px;
@@ -44,5 +49,9 @@
   @include displayFlex(null, space-around, center);
   &__avatar {
     width: 5rem;
+  }
+
+  @include tablet {
+    width: 15rem;
   }
 }
