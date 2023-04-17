@@ -9,16 +9,23 @@
     width: 80%;
     margin: 0 auto;
 
-    @include displayFlex(null, space-between, center);
+    @include displayFlex(null, space-between, center, wrap);
   }
   &__section-container {
-    @include displayFlex(null, space-between, center);
-    width: 25%;
-    margin: 0;
+    @include displayFlex(null, center, center);
+    width: 100%;
+    margin: 0 auto;
+
+    @include tablet {
+      width: 25%;
+    }
   }
   &__logo {
-    width: 2.5rem;
+    width: 15%;
     border: none;
+    @include tablet {
+      width: 2.5rem;
+    }
   }
   &__title {
     @include font($font-title, $bold, 2rem, $primary-brand);
@@ -27,6 +34,13 @@
 
   &__link {
     border-bottom: none;
+    display: block;
+    padding: 0.5rem;
+    text-align: center;
+
+    @include tablet {
+      padding: 0;
+    }
     &:hover {
       border-bottom: none;
       color: $primary-brand;
@@ -44,13 +58,21 @@
     }
   }
   &__user {
-    width: 50%;
-    @include displayFlex(null, space-around, center, wrap);
+    margin: 0 auto;
+    width: 100%;
+
+    @include tablet {
+      margin: 0;
+      @include displayFlex(null, space-around, center, wrap);
+    }
+    @include desktop {
+      width: 50%;
+    }
   }
 }
 
 .loggedon-user {
-  @include displayFlex(null, null, center, center);
+  @include displayFlex(null, center, center);
   &__img {
     width: 2rem;
     margin-right: 1rem;
