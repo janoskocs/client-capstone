@@ -1,5 +1,6 @@
 @use "../../styles/variables" as *;
 @use "../../styles/mixins" as *;
+@use "../../styles/responsive" as *;
 
 .followers {
   &__title {
@@ -8,7 +9,7 @@
 }
 .follower {
   padding: 0.25rem;
-  width: 15rem;
+
   margin: 0.5rem auto;
   cursor: pointer;
   border-bottom-left-radius: 15px 255px;
@@ -18,6 +19,10 @@
   border: 1px solid black;
   background-color: $light;
   @include displayFlex(null, space-around, center);
+
+  @include tablet {
+    width: 15rem;
+  }
 
   &__side {
     text-align: center;
