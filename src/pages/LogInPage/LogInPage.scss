@@ -1,5 +1,6 @@
 @use "../../styles/variables" as *;
 @use "../../styles/mixins" as *;
+@use "../../styles/responsive" as *;
 
 .error {
   color: $primary-brand;
@@ -20,18 +21,28 @@
 .login {
   width: 80%;
   margin: 0 auto;
-  @include displayFlex(null, space-between, center);
+  @include displayFlex(null, space-between, center, wrap);
 }
 
 .login-form {
+  margin: 0 auto;
+
+  @include tablet {
+    margin: 0;
+  }
   &__btn {
     margin-top: 1rem;
   }
 }
 .hero {
+  margin: 0 auto;
   margin-top: 10vh;
   @include displayFlex(null, center, center);
   width: 50%;
+
+  @include tablet {
+    margin: 0;
+  }
 
   &__img {
     width: 15rem;
@@ -56,12 +67,12 @@
     padding: 2rem;
   }
   &__images {
-    display: flex;
-    justify-content: space-around;
+    @include displayFlex(null, space-around, center, wrap);
     padding-bottom: 2rem;
   }
 
   &__img {
+    margin-bottom: 1rem;
     width: 10rem;
   }
 }
