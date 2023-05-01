@@ -15,6 +15,7 @@ const FollowerBoard = () => {
 
   useEffect(() => {
     getMoments(followerId);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -30,6 +31,7 @@ const FollowerBoard = () => {
       setFollowerDetails(data[0]);
     };
     getFollowerDetails();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (!momentsList) {

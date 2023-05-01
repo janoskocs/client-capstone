@@ -1,5 +1,5 @@
 import "./HomePage.scss";
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo } from "react";
 
 import { useAuthContext } from "../../hooks/useAuthContext";
 //Components
@@ -14,7 +14,6 @@ const HomePage = () => {
   const { user } = useAuthContext();
 
   const nodeTypes = useMemo(() => ({ momentNode: MomentNode }), []);
-  const [boardMoodColour, setBoardMoodColour] = useState("#fff");
   const { momentsList, getMoments } = useGetMoments();
 
   useEffect(() => {
