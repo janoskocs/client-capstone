@@ -9,8 +9,8 @@ import image3 from "../../assets/images/pic3.png";
 const LogInPage = () => {
   const { login, error, isLoading } = useLogin();
   const [loginInput, setLoginInput] = useState({
-    email: "",
-    password: "",
+    email: "jane@recruiter.com",
+    password: "abcABC123!",
   });
 
   const handleInput = (e) => {
@@ -46,6 +46,7 @@ const LogInPage = () => {
             value={loginInput.password}
           />
           {error && <p className="error">{error}</p>}
+
           <button
             className="login-form__btn"
             disabled={isLoading}
@@ -53,6 +54,10 @@ const LogInPage = () => {
           >
             Log In
           </button>
+          <p className="login-form__test">
+            Feel free to sign up, or you may log in to Jane's account to test.
+            Thank you for stopping by!
+          </p>
         </form>
       </section>
       <section className="landing">

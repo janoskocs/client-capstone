@@ -1,9 +1,6 @@
 import "./MoodPage.scss";
 import {
-  ResponsiveContainer,
   AreaChart,
-  LineChart,
-  Line,
   CartesianGrid,
   XAxis,
   YAxis,
@@ -52,6 +49,7 @@ const MoodPage = () => {
 
   useEffect(() => {
     getMoods();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const gradientOffset = () => {
@@ -67,9 +65,7 @@ const MoodPage = () => {
 
     return dataMax / (dataMax - dataMin);
   };
-
   const off = moodData && gradientOffset();
-  console.log(moodData);
 
   return (
     <section className="mood">

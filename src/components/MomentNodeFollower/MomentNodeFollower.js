@@ -12,6 +12,7 @@ const MomentNodeFollower = ({ data }) => {
   const [appreciationCount, setAppreciationCount] = useState();
   useEffect(() => {
     setAppreciationCount(data.data.appreciatedBy.length);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   if (!data.data) {
     return <p>Loading</p>;

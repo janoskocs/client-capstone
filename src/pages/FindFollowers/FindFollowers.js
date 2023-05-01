@@ -42,11 +42,12 @@ const FindFollowers = () => {
     }
     getPeopleIFollow();
     getUsers();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [input]);
 
   const handleFollow = async (follower_id) => {
     try {
-      const { data } = await axios.patch(
+      await axios.patch(
         `${process.env.REACT_APP_SERVER_URL}api/user/allusers/${user._id}`,
         {
           follower_id: follower_id,
@@ -66,7 +67,7 @@ const FindFollowers = () => {
 
   const handleUnfollow = async (follower_id) => {
     try {
-      const { data } = await axios.patch(
+      await axios.patch(
         `${process.env.REACT_APP_SERVER_URL}api/user/allusers/unfollow/${user._id}`,
         {
           follower_id: follower_id,

@@ -5,7 +5,6 @@ import { v4 } from "uuid";
 
 export const useUploadImage = () => {
   const [isUploading, setIsUploading] = useState(true);
-  const [imgUrl, setImgUrl] = useState(null);
   const [uploadError, setUploadError] = useState(null);
   //Firebase configuration
   const {
@@ -35,7 +34,7 @@ export const useUploadImage = () => {
     const uniqueId = v4();
     const storageRef = ref(storage, `moments/${uniqueId}${imageFile[0].name}`);
     try {
-      const upload = await uploadBytes(storageRef, imageFile[0]);
+      await uploadBytes(storageRef, imageFile[0]);
     } catch (error) {
       setUploadError(error);
     }

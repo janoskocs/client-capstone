@@ -33,6 +33,11 @@
   &__btn {
     margin-top: 1rem;
   }
+  &__test {
+    @include tablet {
+      width: 200px;
+    }
+  }
 }
 .hero {
   margin: 0 auto;

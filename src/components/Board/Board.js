@@ -3,11 +3,8 @@ import ReactFlow, { useNodesState, ReactFlowProvider } from "reactflow";
 import "reactflow/dist/style.css";
 import React, { useEffect, useMemo } from "react";
 import MomentNodeFollower from "../../components/MomentNodeFollower/MomentNodeFollower";
-import { useAuthContext } from "../../hooks/useAuthContext";
 
 const Board = ({ momentsList, firstName }) => {
-  const { user } = useAuthContext();
-
   const nodeTypes = useMemo(
     () => ({ MomentNodeFollower: MomentNodeFollower }),
     []
